@@ -1,7 +1,0 @@
-{
-  "name": "dataLayerExtension",
-  "version": "1.0.0",
-  "main": "index.js",
-  "author": "cofee-mug <lucas.kostka@escdijon.eu>",
-  "license": "MIT"
-}
