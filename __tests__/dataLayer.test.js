@@ -80,3 +80,12 @@ test('Pushing an event triggers the event\'s name corresponding direct call rule
   expect(called).toBe(true)
 })
 
+test('Getting currentValue out of an empty dataLayer', () => {
+  window._satellite = mockSatellite();
+  window.dataLayer = makeDataLayer();
+
+  var got = window.dataLayer.currentValue('lol')
+
+  expect(got).toBe(null);
+})
+

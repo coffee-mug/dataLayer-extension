@@ -22,16 +22,28 @@ function makeDataLayer() {
 
   var _currentItemWithKey = function (key) {
     if (!key) { return null };
+    var reversed = _reverseDatalayer();
+    var found;
 
-    return _reverseDatalayer().reduce(function(dataset) {
-      if (dataset[key]) {
-        return dataset;
+    if (reversed.length > 0) {
+      found = reversed.filter(function(dataset) {
+        if (dataset[key]) {
+          return dataset;
+        }
+      })
+
+      // there may be multiples push containing that key
+      // return the freshest.
+      if (found.length > 0) {
+        return found[0]
       }
-    })
+    }
+    return null;
   }
 
   var currentValue = function(key) {
     var item = _currentItemWithKey(key);
+
     if (item && item[key]) {
       return item[key]
     }

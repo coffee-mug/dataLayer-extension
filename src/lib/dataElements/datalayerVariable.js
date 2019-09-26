@@ -2,8 +2,9 @@
 
 var makeDataLayer = require('../../dataLayer/dataLayer');
 
-var dataLayer = makeDataLayer();
 
 module.exports = function(settings) {
+  var dataLayer = makeDataLayer();
+  console.log("Settings from dataLayerVariable.js", settings)
   return dataLayer.currentValue(settings.item)
 };
