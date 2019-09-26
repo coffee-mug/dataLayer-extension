@@ -1,8 +1,8 @@
 'use strict';
 
-const makeDataLayer = require('../../dataLayer/dataLayer');
+var makeDataLayer = require('../../dataLayer/dataLayer');
 
-const dataLayer = makeDataLayer();
+var dataLayer = makeDataLayer();
 
 module.exports = function(settings) {
   return dataLayer.currentValue(settings.item)

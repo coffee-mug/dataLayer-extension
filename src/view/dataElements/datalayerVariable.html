@@ -23,16 +23,16 @@
 
         getSettings: function() {
           // TODO Return settings object from form values.
-          const dataLayerItem = document.querySelector('input[name="datalayer-item"]').value;
+          var dataLayerItem = document.querySelector('input[name="datalayer-item"]').value;
           return {
             item: dataLayerItem
           }
         },
 
         validate: function() {
-          const dataLayerItem = document.querySelector('input[name="datalayer-item"]').value;
+          var dataLayerItem = document.querySelector('input[name="datalayer-item"]').value;
 
-          return Boolean(dataLayerItem) && !/./.test(dataLayerItem);
+          return Boolean(dataLayerItem) && !/\./g.test(dataLayerItem);
           // TODO Return whether settings are valid.
         }
       });

@@ -1,8 +1,8 @@
 function makeDataLayer() {
   // existing dataLayer ? merge it
-  const dataLayer = window.dataLayer ? [].concat(window.dataLayer, []) : [];
+  var dataLayer = window.dataLayer ? [].concat(window.dataLayer, []) : [];
 
-  const _setVars = (source) => {
+  var _setVars = function(source) {
     try {
       window._satellite.setVar(source)
     } catch(error) {
@@ -10,35 +10,35 @@ function makeDataLayer() {
     }
   }
 
-  const track = (eventName) => {
+  var track = function (eventName) {
     _satellite.track(eventName)
   }
 
-  const _reverseDatalayer = () => {
+  var _reverseDatalayer = function() {
     // copy avoids persisting the effect of reverse to the dataLayer.
     // it also helps making the function purer
     return [].reverse.call([].concat(dataLayer, []))
   }
 
-  const _currentItemWithKey = (key) => {
+  var _currentItemWithKey = function (key) {
     if (!key) { return null };
 
-    return _reverseDatalayer().reduce(dataset => {
+    return _reverseDatalayer().reduce(function(dataset) {
       if (dataset[key]) {
         return dataset;
       }
     })
   }
 
-  const currentValue = (key) => {
-    let item = _currentItemWithKey(key);
+  var currentValue = function(key) {
+    var item = _currentItemWithKey(key);
     if (item && item[key]) {
       return item[key]
     }
     return null
   }
 
-  const push = function() {
+  var push = function() {
     if (arguments && arguments[0]) {
       if (typeof arguments[0] && !Array.isArray(arguments[0])){
         let pushed = arguments[0];
