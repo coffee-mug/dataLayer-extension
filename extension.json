@@ -1,0 +1,37 @@
+{
+  "displayName": "55dataLayer",
+  "name": "55datalayer",
+  "platform": "web",
+  "version": "1.0.0",
+  "description": "Make use of GTM like dataLayer ",
+  "author": {
+    "name": "Lucas Kostka <lucas@fifty-five.com>"
+  },
+  "viewBasePath": "src/view/",
+  "events": [
+    {
+      "displayName": "dataLayer push",
+      "name": "datalayer-push",
+      "schema": {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "type": "object",
+        "properties": {}
+      },
+      "libPath": "src/lib/events/datalayerPush.js",
+      "viewPath": "events/datalayerPush.html"
+    }
+  ],
+  "dataElements": [
+    {
+      "displayName": "dataLayer variable",
+      "name": "datalayer-variable",
+      "schema": {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "type": "object",
+        "properties": {}
+      },
+      "libPath": "src/lib/dataElements/datalayerVariable.js",
+      "viewPath": "dataElements/datalayerVariable.html"
+    }
+  ]
+}

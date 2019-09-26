@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Data Element</title>
+  </head>
+  <body>
+    Data Element Template
+
+    <input name="datalayer-item" type="text" placeholder="ex: transactionId" />
+
+    <script src="https://assets.adobedtm.com/activation/reactor/extensionbridge/extensionbridge.min.js"></script>
+    <script>
+      window.extensionBridge.register({
+        init: function(info) {
+          if (info.settings) {
+            // TODO Populate form values from persisted settings.
+            if (info.settings.item) {
+              document.querySelector('input[name="datalayer-item"]').value = info.settings.item;
+            }
+          }
+        },
+
+        getSettings: function() {
+          // TODO Return settings object from form values.
+          const dataLayerItem = document.querySelector('input[name="datalayer-item"]').value;
+          return {
+            item: dataLayerItem
+          }
+        },
+
+        validate: function() {
+          const dataLayerItem = document.querySelector('input[name="datalayer-item"]').value;
+
+          return Boolean(dataLayerItem) && !/./.test(dataLayerItem);
+          // TODO Return whether settings are valid.
+        }
+      });
+    </script>
+  </body>
+</html>

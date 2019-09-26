@@ -1,0 +1,22 @@
+{
+  "name": "datalayer-extension",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/coffee-mug/dataLayer-extension.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/coffee-mug/dataLayer-extension/issues"
+  },
+  "homepage": "https://github.com/coffee-mug/dataLayer-extension#readme",
+  "devDependencies": {
+    "jest": "^24.9.0"
+  }
+}
