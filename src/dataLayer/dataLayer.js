@@ -41,7 +41,7 @@ function makeDataLayer() {
   var push = function() {
     if (arguments && arguments[0]) {
       if (typeof arguments[0] && !Array.isArray(arguments[0])){
-        let pushed = arguments[0];
+        var pushed = arguments[0];
         _setVars(pushed)
 
         if (pushed.event) {
