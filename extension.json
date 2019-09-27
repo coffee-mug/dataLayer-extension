@@ -33,5 +33,16 @@
       "libPath": "src/lib/dataElements/datalayerVariable.js",
       "viewPath": "dataElements/datalayerVariable.html"
     }
+  ],
+  "actions": [
+    {
+      "name": "datalayerinit",
+      "displayName": "55 Datalayer Init",
+      "libPath": "src/lib/actions/dataLayerInit.js",
+      "schema": {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+          "type": "object"
+      }
+    }
   ]
 }
