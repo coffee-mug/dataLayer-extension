@@ -1,8 +1,8 @@
 {
   "displayName": "55dataLayer",
-  "name": "55datalayer",
+  "name": "55datalayer-cetelem",
   "platform": "web",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Make use of GTM like dataLayer ",
   "author": {
     "name": "Lucas Kostka <lucas@fifty-five.com>"
@@ -41,7 +41,7 @@
       "libPath": "src/lib/actions/dataLayerInit.js",
       "schema": {
         "$schema": "http://json-schema.org/draft-04/schema#",
-          "type": "object"
+        "type": "object"
       }
     }
   ]

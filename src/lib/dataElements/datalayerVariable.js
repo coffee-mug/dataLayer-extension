@@ -1,10 +1,10 @@
 'use strict';
 
-var makeDataLayer = require('../../dataLayer/dataLayer');
+var makeDatalayer = require('../../dataLayer/dataLayer')
 
-
-module.exports = function(settings) {
-  var dataLayer = makeDataLayer();
-  console.log("Settings from dataLayerVariable.js", settings)
-  return dataLayer.currentValue(settings.item)
+module.exports = function (settings) {
+  if (!dataLayer.currentValue) {
+    window.dataLayer = makeDatalayer();
+  }
+  return window.dataLayer.currentValue(settings.item)
 };

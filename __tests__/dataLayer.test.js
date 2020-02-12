@@ -1,14 +1,15 @@
 const makeDataLayer = require('../src/dataLayer/dataLayer')
+const dataElement = require('../src/lib/dataElements/datalayerVariable')
 
 const mockSatellite = () => ({
   _vars: {},
   _directCallRules: {},
-  getVar(key) { 
+  getVar(key) {
     return this._vars[key];
   },
-  setVar(key, value) { 
+  setVar(key, value) {
     if (typeof key === "object" && !Array.isArray(key) && !value) {
-      for (let k of Object.keys(key)){
+      for (let k of Object.keys(key)) {
         this._vars[k] = key[k];
       }
     } else {
@@ -16,7 +17,7 @@ const mockSatellite = () => ({
     }
   },
   track(rule) {
-    if (this._directCallRules && this._directCallRules[rule]){
+    if (this._directCallRules && this._directCallRules[rule]) {
       return this._directCallRules[rule]()
     }
   }
@@ -65,7 +66,7 @@ test('Searching for the most recent value of a key (not in emebedded objects)', 
   assertCurrentValue("page", "test")
 
   // Updating value of an existing item
-  window.dataLayer.push({ page: "test2"})
+  window.dataLayer.push({ page: "test2" })
   assertCurrentValue("page", "test2")
 })
 
@@ -87,5 +88,21 @@ test('Getting currentValue out of an empty dataLayer', () => {
   var got = window.dataLayer.currentValue('lol')
 
   expect(got).toBe(null);
+})
+
+test('Can push variables along the event', () => {
+  window._satellite = mockSatellite();
+  window.dataLayer = makeDataLayer();
+
+  window.dataLayer.push({ event: "formStart", pageName: "typical pageName" })
+
+  expect(window.dataLayer.currentValue('pageName')).toBe("typical pageName");
+})
+
+test('Race condition: accessing data element before the init action', () => {
+  // dataLayer has not been "activated" yet
+  window.dataLayer = [{ visitorStatus: "loggedin" }];
+
+  expect(dataElement({ item: "visitorStatus" })).toBe("loggedin")
 })
 
