@@ -34,7 +34,7 @@ afterEach(() => {
   window._satellite = undefined
 })
 
-test('Existing dataLayer with a pageload push is merged at creation', () => {
+test('Existing dataLayer with existing push is merged at creation', () => {
   window.dataLayer = [
     { pageCategory: 'content', page: 'test' }
   ]
@@ -105,4 +105,28 @@ test('Race condition: accessing data element before the init action', () => {
 
   expect(dataElement({ item: "visitorStatus" })).toBe("loggedin")
 })
+
+test('Pushes in existing dataLayer get mapped as eVar on extension init', () => {
+  window._satellite = mockSatellite();
+  window.dataLayer = [{ pageName: "my pagename" }];
+
+  window.dataLayer = makeDataLayer();
+
+  expect(window.dataLayer.currentValue('pageName')).toBe("my pagename")
+})
+
+test('Existing events in the dataLayer get repushed on page load', () => {
+  window._satellite = mockSatellite();
+  window.dataLayer = [{ event: "pageLoaded" }];
+
+  let called = false;
+
+  window._satellite._directCallRules['pageLoaded'] = () => (called = true)
+
+  window.dataLayer = makeDataLayer();
+
+  expect(called).toBe(true)
+})
+
+
 

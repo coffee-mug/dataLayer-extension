@@ -1,20 +1,41 @@
 function makeDataLayer() {
-  // existing dataLayer ? merge it
-  var dataLayer = window.dataLayer ? [].concat(window.dataLayer, []) : [];
+  var dataLayer;
 
-  var _setVars = function(source) {
+  // init
+  var init = function () {
+    // existing dataLayer ? merge it
+    dataLayer = window.dataLayer ? [].concat(window.dataLayer, []) : [];
+
+    _trackExistingEvents();
+
+    // Public methods
+    dataLayer.push = push
+    dataLayer.currentValue = currentValue
+
+    return dataLayer
+  }
+
+  var _trackExistingEvents = function () {
+    dataLayer.forEach(push => {
+      if (push.event) {
+        track(push.event)
+      }
+    })
+  }
+
+  var _setVars = function (source) {
     try {
       window._satellite.setVar(source)
-    } catch(error) {
-        console.log('_satellite not loaded on the site.')
+    } catch (error) {
+      console.log('_satellite not loaded on the site.')
     }
   }
 
   var track = function (eventName) {
-    _satellite.track(eventName)
+    window._satellite.track(eventName)
   }
 
-  var _reverseDatalayer = function() {
+  var _reverseDatalayer = function () {
     // copy avoids persisting the effect of reverse to the dataLayer.
     // it also helps making the function purer
     return [].reverse.call([].concat(dataLayer, []))
@@ -26,7 +47,7 @@ function makeDataLayer() {
     var found;
 
     if (reversed.length > 0) {
-      found = reversed.filter(function(dataset) {
+      found = reversed.filter(function (dataset) {
         if (dataset[key]) {
           return dataset;
         }
@@ -41,7 +62,7 @@ function makeDataLayer() {
     return null;
   }
 
-  var currentValue = function(key) {
+  var currentValue = function (key) {
     var item = _currentItemWithKey(key);
 
     if (item && item[key]) {
@@ -50,9 +71,9 @@ function makeDataLayer() {
     return null
   }
 
-  var push = function() {
+  var push = function () {
     if (arguments && arguments[0]) {
-      if (typeof arguments[0] && !Array.isArray(arguments[0])){
+      if (typeof arguments[0] && !Array.isArray(arguments[0])) {
         var pushed = arguments[0];
         _setVars(pushed)
 
@@ -64,9 +85,7 @@ function makeDataLayer() {
     }
   }
 
-  // Public methods
-  dataLayer.push = push
-  dataLayer.currentValue = currentValue
+  init()
 
   return dataLayer
 }
