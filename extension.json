@@ -2,7 +2,7 @@
   "displayName": "55dataLayer",
   "name": "55datalayer-aviva",
   "platform": "web",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Make use of GTM like dataLayer ",
   "author": {
     "name": "Lucas Kostka <lucas@fifty-five.com>"

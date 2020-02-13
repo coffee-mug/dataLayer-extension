@@ -16,7 +16,7 @@ function makeDataLayer() {
   }
 
   var _trackExistingEvents = function () {
-    dataLayer.forEach(push => {
+    dataLayer.forEach(function (push) {
       if (push.event) {
         track(push.event)
       }
